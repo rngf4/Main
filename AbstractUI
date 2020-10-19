@@ -652,7 +652,7 @@ function library:Create(name, size)
 				value = (percentage * (max - min)) + min
 				Value.Text = string.format("%d / %d", value, max)
 				spawn(function()
-					pcall(callback, value)
+					pcall(callback, math.floor(value))
 				end)
 			end
 		end)
