@@ -699,3 +699,4 @@ function library:Create(name, size)
 	end
 	return features
 end
+return library
