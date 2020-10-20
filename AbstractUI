@@ -36,7 +36,7 @@ function library:Create(name, size)
 	UILIB.Name = "UILIB"
 	UILIB.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	UILIB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
+        UILIB.ResetOnSpawn = false
 	local MainFrame = Instance.new("Frame")
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = UILIB
