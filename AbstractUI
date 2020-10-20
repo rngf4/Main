@@ -34,7 +34,7 @@ function library:Create(name, size)
 	size = size or UDim2.new(0, 400, 0, 450)
 	local UILIB = Instance.new("ScreenGui")
 	UILIB.Name = "UILIB"
-	UILIB.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	UILIB.Parent = game.CoreGui
 	UILIB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
         UILIB.ResetOnSpawn = false
 	local MainFrame = Instance.new("Frame")
