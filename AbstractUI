@@ -57,7 +57,9 @@ function library:Create(name, size)
 	shadow.ScaleType = Enum.ScaleType.Slice
 	shadow.SliceCenter = Rect.new(10, 10, 118, 118)
 	shadow.Parent = MainFrame
-
+	
+	--linoria
+	
 	is.InputBegan:connect(function(input)
 		if input.KeyCode == Enum.KeyCode.RightShift then
 			MainFrame.Visible = not MainFrame.Visible
