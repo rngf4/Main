@@ -709,7 +709,8 @@ Library.Create = function(_, LibraryOptions)
 
 					ToggleFunction = function(State)
 						spawn(function()
-							pcall(ToggleOptions.Callback, State)
+							local S, E = pcall(ToggleOptions.Callback, State)
+							if not S then print(E) end
 						end)
 						if State then
 							SlidingToTrue:Play()
