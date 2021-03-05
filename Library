@@ -1474,7 +1474,7 @@ Library.Create = function(_, LibraryOptions)
 					DividerRefresh()
 				end
 
-				ColourPickerLibrary.GetColour = function()
+				ColourPickerLibrary.GetColor = function()
 					return Colour
 				end
 				return ColourPickerLibrary
