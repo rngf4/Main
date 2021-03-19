@@ -327,7 +327,7 @@ Library.Create = function(_, LibraryOptions)
 			end]]
             local Old = MainFrame.Position
 			if UIToggleState then
-                MainFrame.Position = Old
+                MainFrame.Position = UDim2.new(0.5, 0 , 0.5, 0)
             else
                 Old = MainFrame.Position
                 MainFrame.Position = UDim2.new(0.5, 0, 10000, 0)
