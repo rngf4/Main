@@ -174,7 +174,7 @@ local AddDragger = function(Frame)
 				if Key.UserInputType == Enum.UserInputType.MouseButton1 then
 					local ObjectPosition = Vector2.new(Mouse.X - Frame.AbsolutePosition.X, Mouse.Y - Frame.AbsolutePosition.Y)
 					while RS.RenderStepped:wait() and UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-						Frame:TweenPosition(UDim2.new(0, Mouse.X - ObjectPosition.X + (Frame.Size.X.Offset * Frame.AnchorPoint.X), 0, Mouse.Y - ObjectPosition.Y + (Frame.Size.Y.Offset * Frame.AnchorPoint.Y)), 'Out', 'Quad', 0.03, true)
+						Frame:TweenPosition(UDim2.new(0, Mouse.X - ObjectPosition.X + (Frame.Size.X.Offset * Frame.AnchorPoint.X), 0, Mouse.Y - ObjectPosition.Y + (Frame.Size.Y.Offset * Frame.AnchorPoint.Y)), 'Out', 'Quad', 0.06, true)
 					end
 				end
 			end)
