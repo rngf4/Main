@@ -325,7 +325,13 @@ Library.Create = function(_, LibraryOptions)
 					end)
 				end				
 			end]]
-			MainFrame.Visible = UIToggleState
+            local Old = MainFrame.Position
+			if UIToggleState then
+                MainFrame:TweenPosition(Old, Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
+            else
+                Old = MainFrame.Position
+                MainFrame:TweenPosition(UDim2.fromScale(0.5, 1), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.2)
+            end
 		end
 	end)
 
