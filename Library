@@ -71,7 +71,7 @@ local Themes = {
 		DropdownOptionClick = Color3.fromRGB(80, 80, 80),
 
 		ColourPickerBackground = Color3.fromRGB(50, 50, 50),
-		
+
 		BoxOutline = Color3.fromRGB(125, 125, 125),
 		BoxHover = Color3.fromRGB(175, 175, 175),
 		BoxClick = Color3.fromRGB(225, 225, 225),
@@ -231,7 +231,8 @@ Library.Create = function(_, LibraryOptions)
 	local OptionsContainerClips = self:Object("Frame", {
 		BackgroundTransparency = 1,
 		Parent = OptionsContainer,
-		Size = UDim2.new(1, 200, 1, 0)
+		Size = UDim2.new(1, 200, 1, 0),
+		ClipsDescendants = true
 	})
 
 	self:Object("Frame", {
@@ -283,7 +284,7 @@ Library.Create = function(_, LibraryOptions)
 	wait(0.3)
 	TS:Create(Tabs, TI(0.3), {Size = UDim2.new(0, 100, 1, 0)}):Play()
 	local UIToggleState = true
-	
+
 	UIS.InputEnded:connect(function(Input)
 		if Input.KeyCode == Enum.KeyCode.RightControl then
 			UIToggleState = not UIToggleState
@@ -325,13 +326,13 @@ Library.Create = function(_, LibraryOptions)
 					end)
 				end				
 			end]]
-            local Old = MainFrame.Position
+			local Old = MainFrame.Position
 			if UIToggleState then
-                MainFrame.Position = UDim2.new(0.5, 0 , 0.5, 0)
-            else
-                Old = MainFrame.Position
-                MainFrame.Position = UDim2.new(0.5, 0, 10000, 0)
-            end
+				MainFrame.Position = UDim2.new(0.5, 0 , 0.5, 0)
+			else
+				Old = MainFrame.Position
+				MainFrame.Position = UDim2.new(0.5, 0, 10000, 0)
+			end
 		end
 	end)
 
@@ -522,6 +523,7 @@ Library.Create = function(_, LibraryOptions)
 
 			local DividerRefresh = function()
 				Divider.Size = UDim2.new(1, -20, 0, DividerLayout.AbsoluteContentSize.Y + 10)
+				TabRefresh()
 			end
 
 			local AddDescriptionTweens = function(Button, Description)
@@ -536,7 +538,6 @@ Library.Create = function(_, LibraryOptions)
 					ExpandSize:Play()
 					while ShowDescription.PlaybackState ~=  Enum.PlaybackState.Completed and ExpandSize.PlaybackState ~= Enum.PlaybackState.Completed and RS.RenderStepped:wait() do
 						DividerRefresh()
-						TabRefresh()
 					end
 				end)
 
@@ -545,7 +546,6 @@ Library.Create = function(_, LibraryOptions)
 					CondenseSize:Play()
 					while RS.RenderStepped:wait() and HideDescription.PlaybackState ~=  Enum.PlaybackState.Completed and CondenseSize.PlaybackState ~= Enum.PlaybackState.Completed do
 						DividerRefresh()
-						TabRefresh()
 					end
 				end)
 			end
@@ -565,7 +565,7 @@ Library.Create = function(_, LibraryOptions)
 					Hovered = false
 					ButtonDefault:Play()
 				end)
-				
+
 				Button.MouseButton1Down:connect(function()
 					ButtonClick:Play()
 					UIS.InputEnded:connect(function(inputType)
@@ -829,7 +829,7 @@ Library.Create = function(_, LibraryOptions)
 
 				return ToggleLibrary
 			end
-			
+
 			OptionLibrary.ToggleDropdown = function(_, ToggleDropdownOptions)
 				ToggleDropdownOptions = ToggleDropdownOptions or {}
 				ToggleDropdownOptions.Name = ToggleDropdownOptions.Name or "Toggle"
@@ -1308,7 +1308,7 @@ Library.Create = function(_, LibraryOptions)
 					Text = "",
 					AutoButtonColor = false
 				})
-				
+
 				local MainColourIndicator = self:Object("Frame", {
 					Parent = MainColour,
 					AnchorPoint = Vector2.new(0.5, 0.5),
@@ -1317,10 +1317,10 @@ Library.Create = function(_, LibraryOptions)
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					ZIndex = 2
 				})
-				
+
 				local MainColourIndicatorRound = self:Object("Round", MainColourIndicator)
 				MainColourIndicatorRound.CornerRadius = UDim.new(0, 100)
-				
+
 				local MainColourRound = self:Object("Round", MainColour)
 				MainColourRound.CornerRadius = UDim.new(0, 5)
 
@@ -1367,7 +1367,7 @@ Library.Create = function(_, LibraryOptions)
 					Text = "",
 					Position = UDim2.new(1, -6, 0.5, 0)
 				})
-				
+
 				local HueColourIndicator = self:Object("Frame", {
 					Parent = HueSlider,
 					AnchorPoint = Vector2.new(0.5, 0.5),
@@ -1485,13 +1485,13 @@ Library.Create = function(_, LibraryOptions)
 				end
 				return ColourPickerLibrary
 			end
-			
+
 			OptionLibrary.Box = function(_, BoxOptions)
 				BoxOptions = BoxOptions or {}
 				BoxOptions.Name = BoxOptions.Name or "Box"
 				BoxOptions.ClearText = BoxOptions.ClearText or true
 				BoxOptions.Callback = BoxOptions.Callback or function() end
-				
+
 				local Box = self:Object("MainOptionFrame", Divider)
 				Box.BackgroundColor3 = Theme.OptionBackground
 				Box.Name = "Box"
@@ -1506,7 +1506,7 @@ Library.Create = function(_, LibraryOptions)
 					Parent = BoxLabel,
 					PaddingLeft = UDim.new(0, 6)
 				})
-				
+
 				local BoxContainer = self:Object("Frame", {
 					Size = UDim2.new(0, 60, 0, 22),
 					Parent = Box,
@@ -1514,9 +1514,9 @@ Library.Create = function(_, LibraryOptions)
 					Position = UDim2.new(1, -4, 0, 4),
 					BackgroundColor3 = Theme.BoxOutline
 				})
-				
+
 				self:Object("Round", BoxContainer)
-				
+
 				local InputBox = self:Object("TextBox", {
 					PlaceholderText = BoxOptions.Placeholder,
 					PlaceholderColor3 = Theme.Placeholder,
@@ -1531,13 +1531,13 @@ Library.Create = function(_, LibraryOptions)
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					ClearTextOnFocus = BoxOptions.ClearText
 				})
-				
+
 				local PlaceHolderTextBounds = ((BoxOptions.Placeholder and InputBox.TextBounds.X >= 60) and InputBox.TextBounds.X + 10) or 60
-				
+
 				BoxContainer.Size = UDim2.new(0, PlaceHolderTextBounds, 0, 22)
-				
+
 				self:Object("Round", InputBox)
-				
+
 				InputBox:GetPropertyChangedSignal("Text"):connect(function()
 					local InputBoxSize = InputBox.TextBounds.X
 					if InputBoxSize < PlaceHolderTextBounds - 10 then
@@ -1549,22 +1549,22 @@ Library.Create = function(_, LibraryOptions)
 						BoxContainer:TweenSize(UDim2.new(0, InputBoxSize + 10, 0, 22), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.01)	
 					end
 				end)
-				
+
 				local BoxOutlineHover = false
 				local BoxFocused = false
-				
+
 				BoxContainer.MouseEnter:connect(function()
 					BoxOutlineHover = true
 					TS:Create(BoxContainer, TI(0.1), {BackgroundColor3 = Theme.BoxHover}):Play()
 				end)
-				
+
 				BoxContainer.MouseLeave:connect(function()
 					BoxOutlineHover = false
 					if not BoxFocused then
 						TS:Create(BoxContainer, TI(0.1), {BackgroundColor3 = Theme.BoxOutline}):Play()
 					end
 				end)
-				
+
 				InputBox.Focused:connect(function()
 					BoxFocused = true
 					TS:Create(BoxContainer, TI(0.1), {BackgroundColor3 = Theme.BoxClick}):Play()
@@ -1573,11 +1573,11 @@ Library.Create = function(_, LibraryOptions)
 						TS:Create(BoxContainer, TI(0.1), {BackgroundColor3 = (BoxOutlineHover and Theme.BoxHover) or Theme.BoxOutline}):Play()
 					end)
 				end)
-				
+
 				InputBox.FocusLost:connect(function()
 					pcall(BoxOptions.Callback, InputBox.Text)
 				end)
-				
+
 				if BoxOptions.Description then
 					local Description = self:Object("OptionDescription", Box)
 					Description.Text = BoxOptions.Description
@@ -1590,7 +1590,7 @@ Library.Create = function(_, LibraryOptions)
 
 					AddDescriptionTweens(Box, Description)
 				end
-				
+
 				local BoxHover = TS:Create(Box, TI(0.1), {BackgroundColor3 = Theme.OptionHover})
 				local ButtonClick = TS:Create(Box, TI(0.1), {BackgroundColor3 = Theme.OptionClick})
 				local BoxDefault = TS:Create(Box, TI(0.1), {BackgroundColor3 = Theme.OptionBackground})
@@ -1602,31 +1602,31 @@ Library.Create = function(_, LibraryOptions)
 				Box.MouseLeave:connect(function()
 					BoxDefault:Play()
 				end)
-				
+
 				DividerRefresh()
-				
+
 				local BoxLibrary = {}
-				
+
 				BoxLibrary.HideElement = function()
 					Box.Visible = false
 					DividerRefresh()
 				end
-				
+
 				BoxLibrary.ShowElement = function()
 					Box.Visible = true
 					DividerRefresh()
 				end
-				
+
 				BoxLibrary.SetText = function(_, Text)
 					InputBox.Text = Text
 				end
-				
+
 				BoxLibrary.GetText = function()
 					return InputBox.Text
 				end
 				return BoxLibrary
 			end
-			
+
 			OptionLibrary.SearchDropdown = function(_, SearchDropdownOptions)
 				SearchDropdownOptions = SearchDropdownOptions or {}
 				SearchDropdownOptions.Name = SearchDropdownOptions.Name or "Search Dropdown"
@@ -1669,7 +1669,7 @@ Library.Create = function(_, LibraryOptions)
 					Parent = OptionsFrameContainer,
 					PaddingTop = UDim.new(0, 5)
 				})
-				
+
 				local BoxContainer = self:Object("Frame", {
 					Size = UDim2.new(0, 60, 0, 22),
 					Parent = SearchDropdown,
@@ -1806,7 +1806,7 @@ Library.Create = function(_, LibraryOptions)
 				table.foreach(SearchDropdownOptions.Options, function(_, Name)
 					AddDropdownButton(Name)
 				end)
-				
+
 				InputBox:GetPropertyChangedSignal("Text"):connect(function()
 					table.foreach(DropdownButtons, function(_, OptionButton)
 						if string.find(OptionButton.Name, InputBox.Text) then
@@ -1846,7 +1846,7 @@ Library.Create = function(_, LibraryOptions)
 					CondenseOptionsFrame:Play()
 					State = false
 				end
-				
+
 				InputBox.Focused:connect(function()
 					FocusedState = not FocusedState
 					table.foreach(self.Dropdowns, function(_, ResetFunction)
@@ -1876,7 +1876,7 @@ Library.Create = function(_, LibraryOptions)
 				DividerRefresh()
 
 				local SearchDropdownLibrary = {}
-				
+
 				SearchDropdownLibrary.HideElement = function()
 					SearchDropdown.Visible = false
 					DividerRefresh()
