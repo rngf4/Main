@@ -1216,10 +1216,10 @@ Library.Create = function(_, LibraryOptions)
 					table.foreach(DropdownButtons, function(_, Button)
 						if Button.Name == tostring(Option) then
 							Button.Button:Destroy()
-							return true
+							Button = nil
+							return
 						end
 					end)
-					return false
 				end
 
 				DropdownLibrary.HideElement = function()
