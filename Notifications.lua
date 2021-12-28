@@ -102,8 +102,8 @@ function notifications:notify(options)
 		BackgroundTransparency = 1,
 		ImageColor3 = theme.Icon,
 		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.new(0, 12, 0.5, 0),
-		Size = UDim2.fromOffset(36, 36),
+		Position = UDim2.new(0, 15, 0.5, 0),
+		Size = UDim2.fromOffset(30, 30),
 		ImageTransparency = 1
 	})
 
