@@ -276,8 +276,9 @@ function notifications:message(options)
 	self:notify(options)
 end
 
-return setmetatable(notifications, {
+--[[return setmetatable(notifications, {
 	__index = function(t, k)
 		return rawget(notifications, k:lower())
 	end,
-})
+})]]
+return notifications
