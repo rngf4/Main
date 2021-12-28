@@ -22,7 +22,7 @@ local function object(class, properties)
 		end
 		return object(class, properties)
 	end
-  
+
 	function methods:round(radius)
 		radius = radius or 4
 		object("UICorner", {
@@ -79,7 +79,6 @@ function notifications:notify(options)
 	if not callbacksBool then
 		options.Length = 3
 	end
-
 	if self.closeOpened then
 		self.closeOpened()
 	end
@@ -92,10 +91,6 @@ function notifications:notify(options)
 		Visible = false,
 		BackgroundTransparency = 1 --
 	}):round()
-
-
-	
-
 
 	local content = mainFrame:object("Frame", {
 		Size = UDim2.new(1, 0, 1, ((callbacksBool and -40) or 0)),
@@ -124,7 +119,7 @@ function notifications:notify(options)
 		RichText = true,
 		TextTransparency = 1 --
 	})
-  
+
 	local description; if options.Description then
 		description = content:object("TextLabel", {
 			TextColor3 = theme.SecondaryText,
@@ -157,9 +152,9 @@ function notifications:notify(options)
 			BackgroundTransparency = 1 --
 		})
 	end
-  
+
 	local close
-  
+
 	local acceptButton; if options.Accept then
 		options.Accept.Callback = options.Accept.Callback or function() end
 		acceptButton = callbacksContainer:object("TextButton", {
@@ -178,7 +173,7 @@ function notifications:notify(options)
 		if acceptButton.TextBounds.X > 100 then
 			acceptButton.Size = UDim2.new(0, acceptButton.TextBounds.X + 10, 0.5, 0)
 		end
-    
+
 		acceptButton.MouseButton1Click:connect(function()
 			options.Accept.Callback()
 			close()
@@ -192,7 +187,7 @@ function notifications:notify(options)
 			Position = UDim2.fromScale(0.5, 0.5),
 			BackgroundColor3 = theme.Dismiss,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			TextColor3 = theme.Text
+			TextColor3 = theme.Text,
 			Font = Enum.Font.SourceSans,
 			TextSize = 18,
 			Text = options.Dismiss.Text or "No",
@@ -276,9 +271,4 @@ function notifications:message(options)
 	self:notify(options)
 end
 
---[[return setmetatable(notifications, {
-	__index = function(t, k)
-		return rawget(notifications, k:lower())
-	end,
-})]]
 return notifications
