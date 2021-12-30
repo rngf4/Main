@@ -5,7 +5,7 @@ local function object(class, properties)
 	local localObject = Instance.new(class)
 
 	pcall(function()
-		localObject.BorderSizePixel = 0
+	a	localObject.BorderSizePixel = 0
 		localObject.BackgroundColor3 = Color3.fromRGB(255,255,255)
 		localObject.AutoButtonColor = false
 	end)
