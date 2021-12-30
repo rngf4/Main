@@ -5,7 +5,7 @@ local function object(class, properties)
 	local localObject = Instance.new(class)
 
 	pcall(function()
-	a	localObject.BorderSizePixel = 0
+		localObject.BorderSizePixel = 0
 		localObject.BackgroundColor3 = Color3.fromRGB(255,255,255)
 		localObject.AutoButtonColor = false
 	end)
@@ -84,7 +84,7 @@ function notifications:notify(options)
 	end
 
 	local mainFrame = gui:object("Frame", {
-		Size = UDim2.fromOffset(400, (callbacksBool and 96) or 56),
+		Size = UDim2.fromOffset(400, (callbacksBool and 100) or 56),
 		Position = UDim2.new(1, -20, 1, -10),
 		AnchorPoint = Vector2.new(1, 1),
 		BackgroundColor3 = theme.Main,
@@ -93,7 +93,7 @@ function notifications:notify(options)
 	}):round()
 
 	local content = mainFrame:object("Frame", {
-		Size = UDim2.new(1, 0, 1, ((callbacksBool and -40) or 0)),
+		Size = UDim2.new(1, 0, 1, ((callbacksBool and -44) or 0)),
 		BackgroundTransparency = 1
 	})
 
@@ -139,7 +139,7 @@ function notifications:notify(options)
 
 	local callbacksContainer; if callbacksBool then 
 		callbacksContainer = mainFrame:object("Frame", {
-			Size = UDim2.new(1, 0, 0, 40),
+			Size = UDim2.new(1, 0, 0, 44),
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.fromScale(0, 1),
 			BackgroundColor3 = theme.Secondary,
@@ -228,7 +228,7 @@ function notifications:notify(options)
 	self.closeOpened = close
 
 	if options.Description and description.TextBounds.Y > 18 then
-		mainFrame.Size = UDim2.fromOffset(mainFrame.AbsoluteSize.X, description.TextBounds.Y + (38 + ((callbacksBool and 40) or 0)))
+		mainFrame.Size = UDim2.fromOffset(mainFrame.AbsoluteSize.X, description.TextBounds.Y + (38 + ((callbacksBool and 44) or 0)))
 	end
 
 	mainFrame.Size = UDim2.fromOffset(math.clamp(math.max((((acceptButton and acceptButton.AbsoluteSize.X) or 100) + ((dismissButton and dismissButton.AbsoluteSize.X) or 100) + 30) or 230, 70 + description.TextBounds.X), 230, 400), mainFrame.AbsoluteSize.Y)
