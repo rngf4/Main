@@ -39,4 +39,4 @@ notifications:notify{
     Length = 3 -- duration of notification
 }
 ```
-> Please note that none of these fields are required
+> Please note that none of these kwargs are required
