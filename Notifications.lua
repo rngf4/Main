@@ -56,6 +56,23 @@ local gui = object("ScreenGui", {
 	Parent = (rs:IsStudio() and game.Players.LocalPlayer.PlayerGui) or game.CoreGui
 })
 
+local notificationsContainerFrame = gui:object("Frame", {
+	BackgroundTransparency = 1,
+	Size = UDim2.fromScale(1, 1)
+})
+
+notificationsContainerFrame:object("UIListLayout", {
+	SortOrder = Enum.SortOrder.LayoutOrder,
+	HorizontalAlignment = Enum.HorizontalAlignment.Right,
+	VerticalAlignment = Enum.VerticalAlignment.Bottom,
+	Padding = UDim.new(0, 10)
+})
+
+notificationsContainerFrame:object("UIPadding", {
+	PaddingRight = UDim.new(0, 10),
+	PaddingBottom = UDim.new(0, 10)
+})
+
 local notifications = {
 	theme = "dark",
 	colorSchemes = {
@@ -68,8 +85,7 @@ local notifications = {
 			Accept = Color3.fromRGB(60, 40, 200),
 			Dismiss = Color3.fromRGB(60, 60, 65)
 		}
-	},
-	closeOpened = nil
+	}
 }
 
 function notifications:notify(options)
@@ -79,11 +95,8 @@ function notifications:notify(options)
 	if not callbacksBool then
 		options.Length = 3
 	end
-	if self.closeOpened then
-		self.closeOpened()
-	end
 
-	local mainFrame = gui:object("Frame", {
+	local mainFrame = notificationsContainerFrame:object("Frame", {
 		Size = UDim2.fromOffset(400, (callbacksBool and 100) or 56),
 		Position = UDim2.new(1, -20, 1, -10),
 		AnchorPoint = Vector2.new(1, 1),
@@ -209,7 +222,6 @@ function notifications:notify(options)
 
 	close = function()
 		closing = true
-		self.closeOpened = nil
 		spawn(function()
 			icon:tween{ImageTransparency = 1}
 			title:tween{TextTransparency = 1}
@@ -224,8 +236,6 @@ function notifications:notify(options)
 			mainFrame.AbsoluteObject:Destroy()
 		end)
 	end
-
-	self.closeOpened = close
 
 	if options.Description and description.TextBounds.Y > 18 then
 		mainFrame.Size = UDim2.fromOffset(mainFrame.AbsoluteSize.X, description.TextBounds.Y + (38 + ((callbacksBool and 44) or 0)))
